@@ -6,3 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+todoList = TodoList.create(name: "Morning Tasks")
+
+todoItem = TodoItem.create(todo_list_id: 1, date: Date.today, task: "Brushing my teeth", todo_item_number: 1)
