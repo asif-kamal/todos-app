@@ -1,13 +1,16 @@
 class Api::V1::TodoItemsController < ApplicationController
 
     def index
-        @todoItems = TodoItem.all
+        @todoItems = TodoList.todoItems
         render json: @todoItems
     end
 
     def create 
-        @todoItem = TodoItem.create(todoItem_params)
-        render json: @todoItem
+        @todoItem = TodoItem.new(todoItem_params)
+        if @todoItem.save?
+            render json: @todoItem
+        else
+            render json: {error: 'Error: Check Parameters'}
     end
 
    
@@ -18,6 +21,10 @@ class Api::V1::TodoItemsController < ApplicationController
     end
 
     private
+
+    def set_todoList
+        todoList.find(params[:todo_list_id])
+    end
 
     def todosItem_params
         params.require(:todosItem).permit(:date, :task, :todo_item_number)
